@@ -1,10 +1,12 @@
 
 function test() {
-	var peopleWithBirthdays = People.People?.Connections?.list(
+	var allPeople = People.People!.Connections!.list(
 		'people/me',
 		{
+			pageSize: 1000,
 			personFields: 'names,birthdays'
-		}).connections?.filter((person) => person.birthdays != undefined)
-	console.log('Connections: %s', JSON.stringify(peopleWithBirthdays, null, 2));
+		}).connections!
+	var peopleWithBirthdays = allPeople.filter((person) => person.birthdays != undefined)
+	console.log('Total contacts: %s / Contacts with birthdays: %s', allPeople.length, peopleWithBirthdays.length);
 
 }

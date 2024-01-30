@@ -2,17 +2,18 @@
 function test() {
 	let nextPageToken: string | undefined = undefined
 	let allPeople: GoogleAppsScript.People.Schema.Person[] = []
-	while (nextPageToken == undefined) {
-		var response = People.People!.Connections!.list(
+	do {
+		let query = {
+			pageToken: nextPageToken,
+			pageSize: 500,
+			personFields: 'names,birthdays'
+		}
+		let response = People.People!.Connections!.list(
 			'people/me',
-			{
-				nextPageToken: nextPageToken,
-				pageSize: 1000,
-				personFields: 'names,birthdays'
-			})
+			query)
 		nextPageToken = response.nextPageToken
 		allPeople = allPeople.concat(response.connections!)
-	}
+	} while (nextPageToken != undefined)
 	var peopleWithBirthdays = allPeople.filter((person) => person.birthdays != undefined)
 
 

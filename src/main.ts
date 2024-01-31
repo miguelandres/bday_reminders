@@ -23,7 +23,7 @@ import dayjs from "dayjs";
 import { getAllContactsWithBirthdays, namesOfPeopleWhoHaveBirthdaysOnDate } from "./PeopleQueries";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function main() {
+function onTrigger() {
 
   const peopleWithBirthdays = getAllContactsWithBirthdays()
 

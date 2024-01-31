@@ -2,7 +2,8 @@
 
 [![clasp](https://img.shields.io/badge/built%20with-clasp-4285f4.svg)](https://github.com/google/clasp)
 
-Sends an email with today's and tomorrow's birthdays
+Sends an email with today's and tomorrow's birthdays. Can be automated with
+[Time Triggers](https://developers.google.com/apps-script/guides/triggers/installable#time-driven_triggers).
 
 ## Development
 

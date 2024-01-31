@@ -1,5 +1,25 @@
 {
   "dependencies": {
-    "@types/google-apps-script": "^1.0.79"
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@types/google-apps-script": "^1.0.79",
+    "dayjs": "^1.11.10"
+  },
+  "name": "bday_reminders",
+  "description": "[![clasp](https://img.shields.io/badge/built%20with-clasp-4285f4.svg)](https://github.com/google/clasp)",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.23.9",
+    "@babel/plugin-transform-runtime": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
+    "@babel/preset-typescript": "^7.23.3",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-replace": "^5.0.5"
   }
 }

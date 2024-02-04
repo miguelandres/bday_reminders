@@ -20,7 +20,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import dayjs from "dayjs";
-import { getAllContactsWithBirthdays, namesOfPeopleWhoHaveBirthdaysOnDate } from "./PeopleQueries";
+import { getAllContactsWithBirthdays, namesOfPeopleWhoHaveBirthdaysOnDate }
+  from "./PeopleQueries";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function onTrigger() {
@@ -31,15 +32,21 @@ function onTrigger() {
   const tomorrow: dayjs.Dayjs = today.add(1, "d")
   console.log(`today is ${today.format()} and tomorrow is ${tomorrow.format()}`)
 
-  const todayBirthdays = namesOfPeopleWhoHaveBirthdaysOnDate(peopleWithBirthdays, today)
-  const tomorrowBirthdays = namesOfPeopleWhoHaveBirthdaysOnDate(peopleWithBirthdays, tomorrow)
-  console.log('Today birthdays: %s / Tomorrow Birthdays: %s', todayBirthdays, tomorrowBirthdays);
+  const todayBirthdays =
+    namesOfPeopleWhoHaveBirthdaysOnDate(peopleWithBirthdays, today)
+  const tomorrowBirthdays =
+    namesOfPeopleWhoHaveBirthdaysOnDate(peopleWithBirthdays, tomorrow)
+  console.log(
+    'Today birthdays: %s / Tomorrow Birthdays: %s',
+    todayBirthdays, tomorrowBirthdays);
   if (todayBirthdays.length + tomorrowBirthdays.length > 0) {
     let message = ""
     if (todayBirthdays.length > 0)
-      message += `## Birthdays Today (${today.format('YYYY-MM-DD')})\n\n${todayBirthdays.join(', ')}\n\n`
+      message += `## Birthdays Today (${today.format('YYYY-MM-DD')})` +
+        `\n\n${ todayBirthdays.join(', ') } \n\n`
     if (tomorrowBirthdays.length > 0)
-      message += `## Birthdays Tomorrow (${tomorrow.format('YYYY-MM-DD')})\n\n${tomorrowBirthdays.join(', ')}\n`
+      message += `## Birthdays Tomorrow (${tomorrow.format('YYYY-MM-DD')})` +
+        `\n\n${ tomorrowBirthdays.join(', ') } \n`
     console.log(`Sending this over email: \n\n${message}`)
     const userEmail = Session.getEffectiveUser().getEmail()
     GmailApp.sendEmail(userEmail, "Automated Birthday Reminder", message)

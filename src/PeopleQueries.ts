@@ -21,7 +21,10 @@
 
 import dayjs from "dayjs";
 
-export function namesOfPeopleWhoHaveBirthdaysOnDate(people: GoogleAppsScript.People.Schema.Person[], date: dayjs.Dayjs): string[] {
+export function namesOfPeopleWhoHaveBirthdaysOnDate(
+  people: GoogleAppsScript.People.Schema.Person[],
+  date: dayjs.Dayjs
+):string[] {
   return filterPeopleWhoHaveBirthdaysOnDate(people, date)
     .flatMap((person) => person.names)
     .filter((name): name is GoogleAppsScript.People.Schema.Name => !!name)
@@ -29,11 +32,17 @@ export function namesOfPeopleWhoHaveBirthdaysOnDate(people: GoogleAppsScript.Peo
     .filter((name): name is string => !(name == null))
 }
 
-function filterPeopleWhoHaveBirthdaysOnDate(people: GoogleAppsScript.People.Schema.Person[], date: dayjs.Dayjs): GoogleAppsScript.People.Schema.Person[] {
+function filterPeopleWhoHaveBirthdaysOnDate(
+  people: GoogleAppsScript.People.Schema.Person[],
+  date: dayjs.Dayjs
+): GoogleAppsScript.People.Schema.Person[] {
   return people.filter((person) => personHasBirthdayOnDate(person, date))
 }
 
-function personHasBirthdayOnDate(person: GoogleAppsScript.People.Schema.Person, date: dayjs.Dayjs): boolean {
+function personHasBirthdayOnDate(
+  person: GoogleAppsScript.People.Schema.Person,
+  date: dayjs.Dayjs
+): boolean {
   const numMatchingBirthdays: number | undefined =
     person.birthdays?.filter((bday) =>
       bday.date?.day == date.date() &&
@@ -46,14 +55,27 @@ function personHasBirthdayOnDate(person: GoogleAppsScript.People.Schema.Person, 
   return false
 }
 
-function getAllContacts(): GoogleAppsScript.People.Schema.Person[] {
+/**
+ * Gets all the contacts from the Google People API, 500 at a time, and
+ * aggregates them in a single in-memory array.
+ *
+ * Run on corp accounts at your own risk.
+ *
+ * @param personFields Fields to request, see https://developers.google.com/people/api/rest/v1/people.connections/list
+ * @returns All contacts in your google account as Google Apps Script Person
+ * objects, with only the `personFields` filled.
+ */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getAllContacts(
+  personFields: string[] = ['names', 'birthdays']
+): GoogleAppsScript.People.Schema.Person[] {
   let nextPageToken: string | undefined = undefined
   let allPeople: GoogleAppsScript.People.Schema.Person[] = []
   do {
     const query = {
       pageToken: nextPageToken,
       pageSize: 500,
-      personFields: 'names,birthdays'
+      personFields: personFields.join(",")
     }
     const response = People.People!.Connections!.list(
       'people/me',
@@ -65,12 +87,50 @@ function getAllContacts(): GoogleAppsScript.People.Schema.Person[] {
   return allPeople
 }
 
-export function getAllContactsWithBirthdays(): GoogleAppsScript.People.Schema.Person[] {
-  const peopleWithBirthdays = getAllContacts()
+/**
+ * Gets all the contacts from the Google People API, 500 at a time, and
+ * aggregates them in a single in-memory array and then filters them by the
+ * filterFn criteria.
+ *
+ * Run on corp accounts at your own risk.
+ *
+ * @param filterFn a function that takes a Person object and returns true if the
+ * object is to be kept in the array.
+ * @param personFields Fields to request, see https://developers.google.com/people/api/rest/v1/people.connections/list
+ * @returns All contacts in your google account that pass the filterFn as Google
+ * Apps Script Person objects, with only the `personFields` filled.
+ */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getFilteredContacts(
+  filterFn: (person: GoogleAppsScript.People.Schema.Person) => boolean,
+  personFields: string[] = ['names', 'birthdays']
+): GoogleAppsScript.People.Schema.Person[] {
+  const filteredContacts = getAllContacts(personFields)
+    .filter(filterFn)
+  console.log(`found ${filteredContacts.length} people that pass the filter`)
+  return filteredContacts
+}
+
+/**
+ * Get all contacts that have valid birthdays
+ * @param additionalPersonFields Fields to request, additionally to names and
+ * birthdays
+ * @returns An array of contacts with birthdays (and the additional fields
+ * requested)
+ */
+export function getAllContactsWithBirthdays(
+  additionalPersonFields: string[] = []
+): GoogleAppsScript.People.Schema.Person[] {
+
+  const peopleWithBirthdays = getFilteredContacts((person) =>
     // Clear people with no birthday arrays or undefined dates
-    .filter((person) => person.birthdays != undefined)
+    person.birthdays != undefined &&
     // Clear people with undefined months or days
-    .filter((person) => person.birthdays!.filter((bday) => bday.date?.day != undefined && bday.date?.month != undefined))
+    (person.birthdays!.filter((bday) =>
+      bday.date?.day != undefined && bday.date?.month != undefined
+    ).length > 0),
+    additionalPersonFields.concat(['names', 'birthdays'])
+  )
   console.log(`found ${peopleWithBirthdays.length} people with birthdays`)
   return peopleWithBirthdays
 }

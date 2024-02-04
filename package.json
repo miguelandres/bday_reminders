@@ -2,7 +2,8 @@
   "dependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@types/google-apps-script": "^1.0.79",
-    "dayjs": "^1.11.10"
+    "dayjs": "^1.11.10",
+    "eslint": "^8.56.0"
   },
   "name": "bday_reminders",
   "description": "[![clasp](https://img.shields.io/badge/built%20with-clasp-4285f4.svg)](https://github.com/google/clasp)",
@@ -21,6 +22,9 @@
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-replace": "^5.0.5",
-    "@typescript-eslint/eslint-plugin": "^6.20.0"
+    "@stylistic/eslint-plugin": "^1.5.4",
+    "@typescript-eslint/eslint-plugin": "^6.20.0",
+    "@typescript-eslint/parser": "^6.20.0",
+    "eslint-config-prettier": "^9.1.0"
   }
 }

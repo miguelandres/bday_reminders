@@ -11,6 +11,7 @@ yarn-error.log*
 .env
 .nyc_output
 *.lock
+.clasp.json
 
 # Dependency directories
 node_modules/

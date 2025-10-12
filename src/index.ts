@@ -26,7 +26,7 @@ import {
 } from './google_contacts';
 import { Person } from './types';
 
-const numberOfDaysAhead = 10;
+const numberOfDaysAhead = 3;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getContactsWithComingBirthdays(): Map<string, Person[]> {
@@ -68,13 +68,15 @@ function onTrigger(): void {
     console.log('No upcoming birthdays found.');
     return;
   }
-  const prefixes = ['Today ', 'Tomorrow '];
+  const dayDescriptors = ['today', 'tomorrow'];
   let message = '';
   for (let i = 0; i < numberOfDaysAhead; i++) {
     const [date, people] = peopleWithBirthdays[i];
     if (people.length > 0) {
+      const dayDescriptor =
+        i < dayDescriptors.length ? dayDescriptors[i] : `in ${i + 1} days`;
       message +=
-        `## Birthdays ${i < prefixes.length ? prefixes[i] : ''}(${date})` +
+        `## Birthdays ${dayDescriptor} (${date})` +
         `\n\n` +
         people.map(p => p.toString()).join(', ') +
         `\n\n`;

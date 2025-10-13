@@ -11,7 +11,6 @@ yarn-error.log*
 .env
 .nyc_output
 *.lock
-.clasp.json
 
 # Dependency directories
 node_modules/
@@ -27,3 +26,4 @@ coverage
 node_modules
 tmp
 .clasprc.json
+.clasp.json

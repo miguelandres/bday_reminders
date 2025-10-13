@@ -93,7 +93,7 @@ export const getPeopleWithUpcomingBirthdays = (
  * @returns All contacts in your google account as Google Apps Script Person
  * objects, with only the `personFields` filled.
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 export const getAllContacts = (
   personFields: string[] = ['names', 'birthdays']
 ): GoogleAppsScript.People.Schema.Person[] => {
@@ -126,7 +126,7 @@ export const getAllContacts = (
  * @returns All contacts in your google account that pass the filterFn as Google
  * Apps Script Person objects, with only the `personFields` filled.
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 export const getFilteredContacts = (
   filterFn: (person: GoogleAppsScript.People.Schema.Person) => boolean,
   personFields: string[] = ['names', 'birthdays']

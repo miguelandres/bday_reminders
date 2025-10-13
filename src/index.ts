@@ -28,7 +28,6 @@ import { Person } from './types';
 
 const numberOfDaysAhead = 3;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getContactsWithComingBirthdays(): Map<string, Person[]> {
   const people = getAllContactsWithBirthdays().map(person =>
     convertGooglePerson(person)
@@ -54,7 +53,6 @@ function getContactsWithComingBirthdays(): Map<string, Person[]> {
   return peopleWithUpcomingBirthdays;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function onTrigger(): void {
   const peopleWithBirthdays: [string, Person[]][] = Array.from(
     getContactsWithComingBirthdays().entries()

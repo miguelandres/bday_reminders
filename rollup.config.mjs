@@ -18,7 +18,6 @@
 // LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
 import cleanup from 'rollup-plugin-cleanup';
 import iife from 'rollup-plugin-iife';
 import license from 'rollup-plugin-license';
@@ -32,6 +31,10 @@ import commonjs from '@rollup/plugin-commonjs';
 const preventTreeShakingPlugin = () => {
   return {
     name: 'no-treeshaking',
+    /**
+     * @param {any} id
+     * @param {any} importer
+     */
     resolveId(id, importer) {
       if (!importer) {
         // let's not theeshake entry points, as we're not exporting anything in Apps Script files
@@ -48,7 +51,7 @@ export default {
   output: {
     dir: 'dist',
     format: 'esm', // Google Apps Script requires CommonJS',
-    name: 'BdayReminders',
+    name: 'GdriveToOffice',
     strict: false,
   },
 

@@ -21,10 +21,10 @@ jobs:
         uses: actions/checkout@v4
 
       # Sets up Node.js environment
-      - name: Set up Node.js 20.x
+      - name: Set up Node.js 24.x
         uses: actions/setup-node@v4
         with:
-          node-version: "20" # Use a stable LTS version
+          node-version: "24" # Use a stable LTS version
           cache: "npm" # Caches npm dependencies to speed up subsequent runs
 
       # Installs project dependencies using npm ci (clean install for CI)

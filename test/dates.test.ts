@@ -100,7 +100,7 @@ describe('dates', () => {
       expect(
         calculateAgeAtNextBirthday(
           { year: 2000, month: 1, day: 15 },
-          dayjs('2001-01-15')
+          dayjs('2001-01-15T10:00:00Z')
         )
       ).toBe(1);
     });
@@ -116,9 +116,9 @@ describe('dates', () => {
       expect(
         calculateAgeAtNextBirthday(
           { year: 2000, month: 1, day: 15 },
-          dayjs('2001-01-15')
+          dayjs('2001-01-16')
         )
-      ).toBe(1);
+      ).toBe(2);
     });
     it('handles leap year birthdays on non-leap years', () => {
       expect(

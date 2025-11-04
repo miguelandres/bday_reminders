@@ -30,9 +30,12 @@ export const dateMovedToThisYearIsBeforeToday = (
   dayjs.extend(isLeapYear);
   dayjs.extend(isBefore);
   const dateDayJs = dayjs(`${date.year}-${date.month}-${date.day}`);
+  const todayCleaned = dayjs(
+    `${today.year()}-${today.month() + 1}-${today.date()}`
+  );
 
   const dateThisYear = dateDayJs.year(today.year());
-  return dateThisYear.isBefore(today);
+  return dateThisYear.isBefore(todayCleaned);
 };
 
 export const calculateAgeAtNextBirthday = (

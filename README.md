@@ -1,7 +1,7 @@
 
 # Birthday reminder script
 
-[![Hope](https://img.shields.io/badge/tested%20by-H%C2%AF%5C__(%E3%83%84)__%2F%C2%AFPE-green.svg)](http://www.hopedrivendevelopment.com)
+[![Build and test](https://github.com/miguelandres/bday_reminders/actions/workflows/ci.yml/badge.svg)](https://github.com/miguelandres/bday_reminders/actions/workflows/ci.yml)
 [![clasp](https://img.shields.io/badge/built%20with-clasp-4285f4.svg)](https://github.com/google/clasp)
 
 Sends an email with today's and tomorrow's birthdays. Can be automated with

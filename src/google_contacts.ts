@@ -105,7 +105,7 @@ export const getAllContacts = (
       pageSize: 500,
       personFields: personFields.join(','),
     };
-    const response = People.People!.Connections!.list('people/me', query);
+    const response = People!.People!.Connections!.list('people/me', query);
     nextPageToken = response.nextPageToken;
     allPeople = allPeople.concat(response.connections!);
   } while (nextPageToken !== undefined);

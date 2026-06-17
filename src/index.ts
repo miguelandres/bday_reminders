@@ -72,7 +72,7 @@ function onTrigger(): void {
     const [date, people] = peopleWithBirthdays[i];
     if (people.length > 0) {
       const dayDescriptor =
-        i < dayDescriptors.length ? dayDescriptors[i] : `in ${i + 1} days`;
+        i < dayDescriptors.length ? dayDescriptors[i] : `in ${i} days`;
       message +=
         `## Birthdays ${dayDescriptor} (${date})` +
         `\n\n` +

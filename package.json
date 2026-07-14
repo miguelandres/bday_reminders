@@ -22,7 +22,7 @@
     "dayjs": "^1.11.21"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.5",
+    "@eslint/eslintrc": "^3.3.6",
     "@eslint/js": "^10.0.1",
     "@google/clasp": "^3.3.0",
     "@rollup/plugin-commonjs": "^29.0.3",

@@ -18,18 +18,8 @@ npm install -g @google/clasp
 # Login into your google account with clasp
 clasp login
 
-# Install autocomplete for Google Apps Script
-npm install --save @types/google-apps-script
-
-# Install dayjs
-npm i dayjs
-
-# Install rollup resolve
-npm install --save-dev @rollup/plugin-commonjs @rollup/plugin-node-resolve
-
-# Install license-check-and-add
-npm install --save-dev license-check-and-add
-
+# Install dependencies
+npm i
 ```
 
 ### Setting up your own Google script

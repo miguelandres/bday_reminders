@@ -19,7 +19,7 @@
     "node": ">=22"
   },
   "dependencies": {
-    "dayjs": "^1.11.21"
+    "dayjs": "^1.11.23"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.6",
